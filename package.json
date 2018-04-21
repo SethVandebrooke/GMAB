@@ -1,7 +1,7 @@
 {
-  "name": "static-blog",
+  "name": "gmab",
   "version": "1.0.0",
-  "description": "Serve a static blog or documentation site",
+  "description": "Serve a static blog or documentation site builder",
   "main": "server.js",
   "scripts": {
     "test": "start node server.js",
