@@ -1,5 +1,24 @@
 const fs = require("fs");
 const express = require("express");
+const pretty = require('pretty');
+
+var read = path => fs.readFileSync(path, 'utf8'), config;
+
+try {
+  
+  config = JSON.parse(read("./config.json"));
+
+} catch(e) {
+
+  config = {
+    path: "./source",
+    out: "./public",
+    listen: true,
+    sourcePages: "/pages"
+  };
+
+}
+
 
 function crawlDirectory(fs,path) {
     var items = fs.readdirSync(path);
@@ -37,7 +56,6 @@ function compileSite({path = "./source", out = "./public", listen = true, source
         if (!fs.existsSync(out)) {
             fs.mkdirSync(out);
         }
-        var read = function(path) {return fs.readFileSync(path, 'utf8'); };
         pages.forEach(function(page){ // For each page
             var html = read(page.path);
             // Replace all ${directory} with the html files form those directories
@@ -108,14 +126,14 @@ function compileSite({path = "./source", out = "./public", listen = true, source
                       return;
                     }
                     var newfilename = data.FILENAME||packet.name.replace(".json",".html");
-                    fs.writeFileSync(out+"/"+newfilename,temphtml);
+                    fs.writeFileSync(out+"/"+newfilename,pretty(temphtml));
                   }
                 });
               } else {
                 console.log("Directory not found");
               }
             } else {
-              fs.writeFileSync(out+"/"+page.name,html);
+              fs.writeFileSync(out+"/"+page.name,pretty(html));
             }
         });
         if (listen) {
@@ -130,7 +148,7 @@ function compileSite({path = "./source", out = "./public", listen = true, source
     }
 }
 
-compileSite();
+compileSite(config);
 var port = 8080;
 var host = express();
 var server = host.listen(port);

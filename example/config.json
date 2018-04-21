@@ -1,0 +1,6 @@
+{
+  "path" : "./source",
+  "out" : "./public",
+  "listen" : true,
+  "sourcePages" : "/pages"
+}
