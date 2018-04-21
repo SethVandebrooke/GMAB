@@ -1,0 +1,21 @@
+{
+  "name": "static-blog",
+  "version": "1.0.0",
+  "description": "Serve a static blog or documentation site",
+  "main": "server.js",
+  "scripts": {
+    "test": "start node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "static",
+    "blog",
+    "site",
+    "server"
+  ],
+  "author": "Seth Vandebrooke",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
